@@ -21,6 +21,7 @@ from __future__ import unicode_literals
 
 import itertools
 import re
+import datetime
 
 import six
 
@@ -83,10 +84,7 @@ def decode_copy_value(value):
 
 
 def unescape_single_character(match):
-    """
-    Unescape a single escape sequence found by regular expression.
-
-    :param match: Regular expression match object
+    """import datetimeion match object
     :rtype: str
     :raises: ValueError if the escape sequence is invalid
     """
@@ -114,7 +112,11 @@ def encode_copy_value(value):
     """
     if value is None:
         return POSTGRES_COPY_NULL_VALUE
-
+    print(value)
+    print(type(value))
+    if(isinstance(value, str) is not True):
+        value = value.strftime('%Y-%m-%d')
+    
     return value.translate(ENCODE_TRANSLATE_TABLE)
 
 
